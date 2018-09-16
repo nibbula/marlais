@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+# configure -- configuration script for Marlais (non-autoconf)
+#
+
+exit 0

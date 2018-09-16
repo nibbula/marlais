@@ -1,0 +1,14 @@
+Marlais should run on the following systems.  If you successfully run
+Marlais on one of the untested systems, please let me know so I can
+add it to the tested category. 
+
+tested under Rev. 0.6.1
+~~~~~~
+Intel 386 or 486 under Linux.
+Intel 386 and 486 with Windows NT 4.0 and Windows ME (MSVC++ 6.0)
+
+tested under Rev. 0.5.12
+~~~~~~
+MacOS 8.6 and lower
+SGI workstations under IRIX
+

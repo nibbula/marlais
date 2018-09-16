@@ -1,0 +1,23 @@
+If your machine is not contained in the MACHINES file, see PORTING for
+information on porting to your architecture.
+
+Edit config.h for your platform and preferences.
+
+Modify the variables in the Makefile, if necessary:
+  CC
+	Your ANSI C compiler
+  CFLAGS
+	Special flags for your ANSI C compiler
+  INIT_FILE
+	Where to find the initialization file
+  READLINE_FLAGS
+	If you defined HAS_READLINE this may @@@
+
+NOTE: Regenerating the Makefile dependencies (a.k.a make depend) currently
+will probably only work with gcc. If you develop on a machine without gcc, you
+may need to regenerate dependencies another way.
+
+Modify the MARLAIS_INIT variable to point to the place where the
+initialization file, init.dylan, will be kept.
+
+Type make.

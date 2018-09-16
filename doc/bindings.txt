@@ -1,0 +1,472 @@
+
+  Marlais Init.Dylan exported names
+
+This document tracks Marlais' compliance to the Dylan Language
+Specification and provides those working on Marlais ideas for areas on
+which to bring Marlais into closer compliance.
+
+Note that some of the exported names properly belong elsewhere, e.g. to
+the Common-Dylan specification libraries. So, this document also points
+out good places to attack the common-dylan spec.
+
+
+    Exported Classes
+
+DRM has 52 names exported.
+
+<abort> = {the class <abort> (39)}
+<array> = {the class <array> (24)}
+* <big-integer> = {> (9)}
+<boolean> = {the class <boolean> (2)}
+<byte-string> = {the class <byte-string> (30)}
+<character> = {(46)}
+<class> = {the class <class> (55)}
+* <class-slots-class> = {the class <class-slots-class> (59)}
+<collection> = {(14)}
+<complex> = {the class <complex> (4)}
+<condition> = {(33)}
+<deque> = {the class <deque> (23)}
+* <deque-entry> = {the class <deque-entry> (58)}
+<double-float> = {the class <double-float> (13)}
+<empty-list> = {(26)}
+<error> = {the class <error> (40)}
+* <exit-function> = {the class <exit-function> (51)}
+<explicit-key-collection> = {the class <explicit-key-collection> (15)}
+(missing <extended-float>)
+<float> = {the class <float> (11)}
+* <foreign-pointer> = {the class <foreign-pointer> (61)}
+<function> = {(47)}
+<generic-function> = {the class <generic-function> (49)}
+<integer> = {the class <integer> (7)}
+* <integer-state> = {false-or( <small-integer>) (8)}
+<list> = {the class <list> (25)}
+<method> = {the class <method> (50)}
+<mutable-collection> = {the class <mutable-collection> (17)}
+<mutable-explicit-key-collection> = {(19)}
+<mutable-sequence> = {the class <mutable-sequence> (20)}
+<number> = {the class <number> (3)}
+* <object-handle> = {the class <object-handle> (60)}
+<object-table> = {the class <object-table> (22)}
+<object> = {the class <object> (1)}
+<pair> = {the class <pair> (27)}
+* <primitive> = {(48)}
+<range> = {the class <range> (62)}
+* <ratio> = {the class <ratio> (10)}
+<rational> = {> (6)}
+<real> = {the class <real> (5)}
+<restart> = {the class <restart> (37)}
+<sealed-object-error> = {> (43)}
+<sequence> = {> (18)}
+<serious-condition> = {the class <serious-condition> (34)}
+<simple-error> = {the class <simple-error> (41)}
+<simple-object-vector> = {> (32)}
+<simple-restart> = {the class <simple-restart> (38)}
+<simple-warning> = {the class <simple-warning> (36)}
+<single-float> = {the class <single-float> (12)}
+<singleton> = {> (54)}
+* <small-integer> = {the class <small-integer> (8)}
+<stretchy-collection> = {> (16)}
+<stretchy-vector>
+  -- but it's currently very, very broken.
+<string> = {the class <string> (28)}
+<symbol> = {the class <symbol> (45)}
+* <table-entry> = {the class <table-entry> (57)}
+<table> = (21)
+<type-error> = {> (42)}
+<type> = {the class <type> (53)}
+<unicode-string> = {the class <unicode-string> (31)}
+* <unwind-protect-function> = {the class <unwind-protect-function> (52)}
+* <variable-name> = {the class <variable-name> (44)} -- this class
+should probably be hidden from the Marlais user.
+<vector> = {the class <vector> (29)}
+<warning> = {the class <warning> (35)}
+
+* = name exported from Marlais, but not from DRM's Dylan module
+
+
+    Exported Functions
+
+The DRM has 169 exported functions.
+
+* = {the generic function * (n1 :: <number>, n2 :: <number>)}
++ = {the generic function + (n1 :: <number>, n2 :: <number>)}
+- = {the generic function - (n1 :: <number>, n2 :: <number>)}
+/ = {the generic function / (n1 :: <number>, n2 :: <number>)}
+< = {the generic function < (o1, o2, #rest x)}
+<= = {an anonymous method (o1, o2)#(~, #(<, o2, o1))}
+= = {the generic function = (o1, o2, #rest x)}
+== = {anonymous method ==}
+~== = {anonymous method ~==}
+> = {an anonymous method (o1, o2)#(<, o2, o1)}
+>= = {an anonymous method (o1, o2)#(~, #(<, o1, o2))}
+^ = {the generic function ^ (n :: <number>, i :: <integer>)}
+~ = {an anonymous method ~}
+~= = {an anonymous method (o1, o2)#(~, #(=, o1, o2))}
+* above = {the generic function above (x, #rest x)}
+* above-setter = {the generic function above-setter (x, x, #rest x)}
+(missing abort)
+abs = {the generic function abs (n :: <number>)}
+add = {the generic function add (s :: <sequence>, new-element)}
+add! = {the generic function add! (sequence1 :: <sequence>, new-element)}
+add-method = {the generic function add-method (gf, meth, #rest x)}
+add-new = {the generic function add-new (sequence :: <sequence>,
+new-element, #key #(#"test", test, #f))}
+add-new! = {the generic function add-new! (sequence1 :: <sequence>,
+new-element, #key #(#"test", test, #f))}
+all-superclasses = {an anonymous method (c ::
+<class>)#(%all-superclasses, c)}
+always = {the generic function always (obj, #rest x)}
+any? = {the generic function any? (procedure :: <function>, collection
+:: <collection>, #rest more-collections)}
+applicable-method? = {the generic function applicable-method? (m, #rest x)}
+apply = {the generic function apply (f, #rest x)}
+aref = {the generic function aref (a :: <array>, #rest indices)}
+aref-setter = {the generic function aref-setter (new-val, a :: <array>,
+#rest indices)}
+as = {the generic function as (c, obj, #rest x)}
+as-lowercase = {the generic function as-lowercase (s, #rest x)}
+as-lowercase! = {the generic function as-lowercase! (s, #rest x)}
+as-uppercase = {the generic function as-uppercase (s, #rest x)}
+as-uppercase! = {the generic function as-uppercase! (s, #rest x)}
+ash = {the generic function ash (i, count, #rest x)}
+backward-iteration-protocol = {the generic function
+backward-iteration-protocol (c, #rest x)}
+(missing break)
+* below = {the generic function below (x, #rest x)}
+* below-setter = {the generic function below-setter (x, x, #rest x)}
+* by = {the generic function by (x, #rest x)}
+* by-setter = {the generic function by-setter (x, x, #rest x)}
+ceiling = {the generic function ceiling (r :: <real>)}
+ceiling/ = {the generic function ceiling/ (r1 :: <real>, r2 :: <real>)}
+cerror = {the generic function cerror (#rest x)}
+choose = {the generic function choose (predicate :: <function>, sequence
+:: <sequence>)}
+choose-by = {the generic function choose-by (predicate :: <function>,
+test-sequence :: <sequence>, value-sequence :: <sequence>)}
+complement = {the generic function complement (func, #rest x)}
+compose = {the generic function compose (function, #rest x)}
+concatenate = {the generic function concatenate (sequence1 ::
+<sequence>, #rest sequences)}
+concatenate-as = {the generic function concatenate-as (class :: <class>,
+sequence1 :: <sequence>, #rest more-sequences)}
+(missing condition-format-arguments)
+(missing condition-format-string)
+conjoin = {the generic function conjoin (predicate, #rest x)}
+copy-sequence = {the generic function copy-sequence (source ::
+<sequence>, #key #(#"start", start, #f))}
+* copy-state = {the generic function copy-state (c, state, #rest x)}
+* current-element = {the generic function current-element (c, state,
+#rest x)}
+* current-element-setter = {the generic function current-element-setter
+(obj, c, state, #rest x)}
+* current-key = {the generic function current-key (c, state, #rest x)}
+* current-module = {primitive function current-module}
+curry = {the generic function curry (f, #rest x)}
+* debug-name = {the generic function debug-name (c, #rest x)}
+* debug-name-setter = {the generic function debug-name-setter (s, m,
+#rest x)}
+(missing default-handler)
+dimension = {the generic function dimension (a :: <array>, axis ::
+<integer>)}
+dimensions = {the generic function dimensions (v, #rest x)}
+direct-subclasses = {an anonymous method (c ::
+<class>)#(%direct-subclasses, c)}
+direct-superclasses = {an anonymous method (c ::
+<class>)#(%direct-superclasses, c)}
+disjoin = {the generic function disjoin (predicate, #rest x)}
+do = {the generic function do (procedure :: <function>, collection ::
+<collection>, #rest more-collections)}
+(missing do-handlers)
+element = {the generic function element (c :: <collection>, key, #rest
+rest)}
+element-setter = {the generic function element-setter (val, l, i, #rest x)}
+empty? = {the generic function empty? (collection :: <collection>)}
+* eof-object? = {the generic function eof-object? (obj, #rest x)}
+error = {the generic function error (msg, #rest x)}
+* eval = {the generic function eval (obj, #rest x)}
+even? = {the generic function even? (i, #rest x)}
+every? = {the generic function every? (procedure :: <function>,
+collection :: <collection>, #rest more-collections)}
+fill! = {the generic function fill! (mutable-collection ::
+<mutable-collection>, value, #key #(#"start", start, #f))}
+* final-state = {the generic function final-state (v, #rest x)}
+find-key = {the generic function find-key (collection :: <collection>,
+procedure :: <function>, #key #(#"skip", skip, #f) #(#"failure",
+failure, #f))}
+find-method = {the generic function find-method (gf, #rest x)}
+* finished-state? = {the generic function finished-state? (c, state,
+limit, #rest x)}
+first = {the generic function first (sequence :: <sequence>)}
+first-setter = {the generic function first-setter (new-value, sequence
+:: <sequence>)}
+floor = {the generic function floor (r :: <real>)}
+floor/ = {the generic function floor/ (r1 :: <real>, r2 :: <real>)}
+forward-iteration-protocol = {the generic function
+forward-iteration-protocol (c, #rest x)}
+* from = {the generic function from (x, #rest x)}
+* from-setter = {the generic function from-setter (x, x, #rest x)}
+function-arguments = {the generic function function-arguments (f, #rest x)}
+function-specializers = {the generic function function-specializers
+(func, #rest x)}
+function-return-values = {the generic function function-return-values
+(func, #rest x)}
+gcd = {the generic function gcd (int1, int2, #rest x)}
+generic-function-mandatory-keywords = {the generic function
+generic-function-mandatory-keywords (gf, #rest x)}
+generic-function-methods = {the generic function
+generic-function-methods (gf, #rest x)}
+head = {the generic function head (lst, #rest x)}
+head-setter = {the generic function head-setter (obj, p, #rest x)}
+identity = {an anonymous method (x)x}
+* initial-state = {the generic function initial-state (l, #rest x)}
+initialize = {the generic function initialize (instance, #rest x)}
+instance? = {an anonymous method (obj, typ :: <type>)#(%instance?, obj,
+typ)}
+integral? = {the generic function integral? (n, #rest x)}
+intersection = {the generic function intersection (sequence1 ::
+<sequence>, sequence2 :: <sequence>, #key #(#"test", test, #f))}
+key-sequence = {the generic function key-sequence (s, #rest x)}
+key-test = {the generic function key-test (c :: <collection>)}
+last = {the generic function last (sequence :: <sequence>)}
+last-setter = {the generic function last-setter (new-value, s, #rest x)}
+lcm = {the generic function lcm (int1, int2, #rest x)}
+limited = {the generic function limited (int, #rest x, #key #(#"min",
+min, #f) #(#"max", max, #f))}
+list = {the generic function list (#rest x)}
+* load = {primitive function load}
+logand = {the generic function logand (#rest x)}
+logior = {the generic function logior (#rest x)}
+(missing logbit?)
+make = {the generic function make (c, #rest x)}
+map = {the generic function map (procedure :: <function>, collection ::
+<collection>, #rest more-collections)}
+map-as = {the generic function map-as (class :: <class>, procedure ::
+<function>, collection :: <collection>, #rest more-collections)}
+map-into = {the generic function map-into (mutable-collection ::
+<mutable-collection>, procedure :: <function>, collection ::
+<collection>, #rest more-cols)}
+max = {the generic function max (n1, #rest x)}
+member? = {the generic function member? (value, collection ::
+<collection>, #key #(#"test", test, #f))}
+min = {the generic function min (n1, #rest x)}
+modulo = {the generic function modulo (r1 :: <real>, r2 :: <real>)}
+negative = {the generic function negative (n :: <number>)}
+negative? = {the generic function negative? (r :: <real>)}
+* next-state = {the generic function next-state (c, state, #rest x)}
+object-class = {an anonymous method (o)#(%object-class, o)}
+(missing object-hash)
+odd? = {the generic function odd? (i, #rest x)}
+pair = {the generic function pair (car, cdr, #rest x)}
+pop = {the generic function pop (d, #rest x)}
+pop-last = {the generic function pop-last (d, #rest x)}
+positive? = {the generic function positive? (r :: <real>)}
+* previous-state = {the generic function previous-state (v, state, #rest x)}
+push = {the generic function push (d, new, #rest x)}
+push-last = {the generic function push-last (d, new, #rest x)}
+range = {the generic function range (#rest x)}
+rank = {the generic function rank (a :: <array>)}
+rcurry = {the generic function rcurry (f, #rest x)}
+reduce = {the generic function reduce (procedure :: <function>,
+initial-value, collection :: <collection>)}
+reduce1 = {the generic function reduce1 (procedure :: <function>,
+collection :: <collection>)}
+remainder = {the generic function remainder (r1 :: <real>, r2 :: <real>)}
+remove = {the generic function remove (sequence :: <sequence>, value,
+#key #(#"test", test, #f) #(#"count", count, #f))}
+remove! = {the generic function remove! (sequence1 :: <sequence>, value,
+#key #(#"test", test, #f) #(#"count", count, #f))}
+remove-duplicates = {the generic function remove-duplicates (sequence ::
+<sequence>, #key #(#"test", test, #f))}
+remove-duplicates! = {the generic function remove-duplicates! (sequence1
+:: <sequence>, #key #(#"test", test, #f))}
+(missing remove-key!)
+remove-method = {the generic function remove-method (gf, meth, #rest x)}
+replace-elements! = {the generic function replace-elements!
+(mutable-collection :: <mutable-collection>, predicate :: <function>,
+new-value-fn :: <function>, #key #(#"count", count, #f))}
+replace-subsequence! = {the generic function replace-subsequence!
+(mutable-sequence :: <sequence>, insert-sequence :: <sequence>, #key
+#(#"start", start, #f))}
+(missing restart-query)
+(missing return-allowed?)
+(missing return-description)
+(missing return-query)
+reverse = {the generic function reverse (sequence :: <sequence>)}
+reverse! = {the generic function reverse! (sequence1 :: <sequence>)}
+round = {the generic function round (r :: <real>)}
+round/ = {the generic function round/ (r1 :: <real>, r2 :: <real>)}
+row-major-index = {the generic function row-major-index (a :: <array>,
+#rest subscripts)}
+* seal = {the generic function seal (c, #rest x)}
+second = {the generic function second (sequence :: <sequence>)}
+second-setter = {the generic function second-setter (new-value, sequence
+:: <sequence>)}
+* set-module = {primitive function set-module}
+shallow-copy = {the generic function shallow-copy (o, #rest x)}
+signal = {the generic function signal (#rest x)}
+singleton = {an anonymous method (o)#(%singleton, o)}
+size = {the generic function size (collection :: <collection>)}
+size-setter = {the generic function size-setter (x, x, #rest x)}
+slot-initialized? = {an anonymous method (obj, slot)#(~, #(id?, #(slot,
+obj), %uninitialized-slot-value))}
+sort = {the generic function sort (sequence :: <sequence>, #key
+#(#"test", test, #f) #(#"stable", stable, #f))}
+sort! = {the generic function sort! (sequence1 :: <sequence>, #key
+#(#"test", test, #f) #(#"stable", stable, #f))}
+sorted-applicable-methods = {the generic function
+sorted-applicable-methods (gf, #rest x)}
+subsequence-position = {the generic function subsequence-position (big
+:: <sequence>, pattern :: <sequence>, #key #(#"test", test, #f)
+#(#"count", count, #f))}
+subtype? = {an anonymous method (t1 :: <type>, t2 :: <type>)#(%subtype?,
+t1, t2)}
+* system = {primitive function system}
+(missing table-protocol)
+tail = {the generic function tail (lst, #rest x)}
+tail-setter = {the generic function tail-setter (obj, p, #rest x)}
+third = {the generic function third (sequence :: <sequence>)}
+third-setter = {the generic function third-setter (new-value, sequence
+:: <sequence>)}
+* to = {the generic function to (x, #rest x)}
+* to-setter = {the generic function to-setter (x, x, #rest x)}
+truncate = {the generic function truncate (r :: <real>)}
+truncate/ = {the generic function truncate/ (r1 :: <real>, r2 :: <real>)}
+(missing type-error-expected-type)
+(missing type-error-value)
+type-for-copy = {the generic function type-for-copy (o, #rest x)}
+type-union = {the generic function type-union (#rest x)}
+union = {the generic function union (o1, o2, #rest args)}
+values = {primitive function values}
+vector = {the generic function vector (#rest x)}
+* warning = {the generic function warning (msg, #rest x)}
+zero? = {the generic function zero? (n :: <number>)}
+
+
+      Bindings that really shouldn't be visible to Marlais users
+
+object-princ = {the generic function object-princ (stream, obj, #rest x)}
+object-print = {the generic function object-print (stream, obj, #rest x)}
+* set-slot-value! = {primitive function set-slot-value!}
+slot-value = {primitive function slot-value}
+
+
+      Bindings that should be eliminated from Marlais
+
+map-forward-iteration-protocol = {the generic function
+map-forward-iteration-protocol (c, #rest x)}
+map1 = {the generic function map1 (f, c, #rest x)}
+map2 = {the generic function map2 (f, c1, c2, #rest x)}
+map1* = {the generic function map1* (functions, c, #rest x)}
+map2* = {the generic function map2* (functions, c1, c2, #rest x)}
+map3* = {the generic function map3* (functions, c1, c2, c3, #rest x)}
+
+
+    Exported Constants
+
+The DRM has one name exported.
+
+(missing $permanent-hash-state)
+
+
+    Exported Defining Macros
+
+DRM has 8 defining macros, Marlais has NONE! It hard-wires these
+defining macros into the parser/interpreter:
+
+class-definer
+constant-definer
+(missing domain-definer) -- true?
+generic-definer
+library-definer -- true?
+method-definer
+module-definer
+variable-definer
+(missing function-definer) -- added to the Dylan language specification
+after the DRM was published.
+
+
+    Exported Statement Macros
+
+DRM has 10 names, again Marlais has these hard-wired!
+
+begin
+block
+case
+for -- but not fully implemented?
+if
+method
+select
+unless
+until
+while
+* when -- true?
+
+
+    Exported Function Macros
+
+DRM has 3, Marlais has these hard-wired!
+
+:=
+|
+&
+
+
+    Bindings that are targets for the Common-Dylan spec
+
+
+      IO Library
+
+
+        Classes
+
+* <stream> = {the class <stream> (56)}
+
+
+        Functions
+
+* close-stream = {the generic function close-stream (s, #rest x)} --
+should be renamed to close
+format = {the generic function format (stream, s, #rest x)}
+format-out = {an anonymous method (#rest regular-args)#(apply, f,
+#(concatenate, curried-args, regular-args))}
+
+The next two functions must be restructured to conform to the
+common-dylan spec.
+
+    open-input-file = {the generic function open-input-file (s, #rest x)}
+    open-output-file = {the generic function open-output-file (s, #rest x)}
+
+princ = {the generic function princ (obj, #rest x)}
+print = {the generic function print (obj, #rest x)}
+print* = {the generic function print* (obj, #rest x)}
+read = {the generic function read (#rest x)}
+read-char = {the generic function read-char (#rest x)}
+write-char = {the generic function write-char (c, #rest x)}
+
+
+        Variables
+
+* *standard-output* :: {the class <stream> (56)} = {output stream}
+
+
+      Transcendentals Library
+
+
+        Functions
+
+* atan2 = {the generic function atan2 (d1, d2, #rest x)}
+* cos = {the generic function cos (n, #rest x)}
+exp = {the generic function exp (n, #rest x)}
+ln = {the generic function ln (n, #rest x)}
+sin = {the generic function sin (n, #rest x)}
+sqrt = {the generic function sqrt (i, #rest x)}
+
+
+      Date Library
+
+
+        Functions
+
+* clock = {primitive function clock}
+* ctime = {primitive function ctime}
+time = {primitive function time}

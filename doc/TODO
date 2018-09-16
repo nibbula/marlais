@@ -1,0 +1,146 @@
+Bugs:
+
+- There's some memory trashing bug or bug with the garbage collector, which
+  seems to be fixed by turning the gc off. I should see if makeing malloc
+  protect freed regions hits the bug. If not. is it reasonable to assume the
+  GC is broken? If we're not trashing freed regions, then the bug should show
+  up with the GC off too, since it probably means we're trashing still in use
+  regions? Right?
+
+  It usually shows up as things being incorrectly unbound or when starting up
+  or first loading. Changing memory placement, changes when or where it
+  happens. Such as changing the size of the symbol table.
+
+  Of course with the GC off you can't do too much consing, like fib(41)
+  without memoization.
+
+- I think there was a problem with loading and the parser not properly getting
+  reset and set up. It seems like I fixed loading, but now you have to hit ^D
+  twice before it recognises and EOF (and gets to call yywrap).
+
+Problems:
+
+General:
+
+- format-out()
+  - doesn't work right
+    format-out("(%=)", 23);
+    it outputs: "()\n23"
+  - really slow
+
+- debugging for load() sucks
+  - add line number tracking
+    x Did a quick word-around. When DEBUG and !SMALL_OBJECTS, I added the
+      ability for objects to remember the source location where they were
+      created. This isn't necessarily anywhere near where the error occurs,
+      but at least it's a clue. It doesn't seem to be that useful from the
+      error messages. It's mostly useful when running in a debugger.
+
+      To do this better might require some parser re-design. Most errors seem
+      to happen at eval time. When loading files the parser state is gone
+      before we even start evaluation.
+
+- constants can be modified
+- constant slots not supported, no "constant" slot adjective
+
+- No macros, "macro" is not a keyword
+
+- object-hash() is missing
+
+- define library is missing
+  - I'd like to at least just add the syntax with the goal of being able to
+    run simple tests using the same source in both mindy and marlais.
+    We can make real libraries later.
+
+Syntax:
+
+- Doesn't support unicode string escapes
+  e.g. "\<44>\<79>\<6c>\<61>\<6e>" = "Dylan";
+
+- \name isn't recognized
+  e.g. let \if = "if";
+
+Internal:
+
+- Without SMALL_OBJECTS sizeof(struct object) is 76 (too big)
+- With SMALL_OBJECTS values are too limited
+
+- I think the distinction between keywords and symbols is *bogus*, but I'm not
+  totally convinced there's not something that relies on it. In particular, I
+  think that having a colon ":" at the end of keyword string values is not
+  right. It put the colons on when defining built-in keywords. It there some
+  reason that keywords and symbols must be distinct? #"foo" == foo: so why
+  should else_keyword != make_keyword("else") ?  Also then you have to take
+  the colon off and put it on for converting back and forth from
+  keyword<->symbol.  Perhaps there's some confusion with source record
+  keywords? Or perhaps some holdover from prefix syntax?
+
+---------------------------------------------------------------------------
+dma's list (from the web page)
+
+1. First, we'll fix any inconsistancies of the functions defined in the Dylan
+Reference Manual (DRM), chapter 12.  Actually, this task isn't so herculean,
+as most of the function and class bindings are correct, see the bindings list
+for what needs to be done.
+ 
+2. Next, we'll implement as much as the common-dylan spec described in the
+ Common Dylan and Functional Extensions Reference
+
+3. Finally, we'll implement the hygenic macro system, and then, reimplement
+the basic "syntax" using macros and in accordance with chapter 14 of the DRM.
+
+---------------------------------------------------------------------------
+Enhancements:
+
+- Readline
+  - completions
+    - on symbols
+    - on grammar
+  x paren flashing
+
+- ffi 
+  - minimal
+  - full blown like fun-o / gwydion
+
+after ffi:
+
+- sql
+  - consider targeting towards fun-o
+
+- curses
+  - ya
+
+- network streams
+
+- Fast load/dump
+  - simple
+    format:
+      magic #
+      format description (endianness, sizes?)
+      binary parsed objects
+  - look at DOOD
+
+---------------------------------------------------------------------------
+Change Log: (incomplete)
+
+- makefile changes
+- added config.h, pulled out some config vars, made some new ones
+- ffi
+- loading bug?
+- debug source info in objects
+- paren matching in readline
+
+---------------------------------------------------------------------------
+
+"One: I am a Welshman;
+ two: I am a drunkard;
+ three: I am a lover of the human race,
+ especially of women."
+
+- Dylan Marlais Thomas
+
+---------------------------------------------------------------------------
+
+Local variables:
+mode: text
+End:
